@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -74,7 +74,7 @@ class TestPanel(dPanel):
         sz.appendSpacer(20)
 
         btn = dButton(self, Caption=_("Show WordWrap demo"))
-        btn.bindEvent(dEvents.Hit, self.onShowWWDemo)
+        btn.bindEvent(events.Hit, self.onShowWWDemo)
         sz.append(btn, halign="center")
 
     def getDynamicCaption(self):
@@ -101,8 +101,8 @@ class TestPanel(dPanel):
                 sz.append(lbl, "x", border=40, borderSides=("Left", "Right"))
 
                 sld = self.slider = dSlider(self, Value=100, Continuous=False)
-                sld.bindEvent(dEvents.Hit, self.onSlider)
-                sld.bindEvent(dEvents.Resize, self.onSlider)
+                sld.bindEvent(events.Hit, self.onSlider)
+                sld.bindEvent(events.Resize, self.onSlider)
                 sz.append(sld, "x", border=10)
 
                 txt = getGettyAddr()

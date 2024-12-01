@@ -3,8 +3,7 @@ import random
 
 import dabo
 import dabo.ui
-from dabo.dApp import dApp
-import dabo.dEvents as dEvents
+from dabo.application import dApp
 from dabo.dLocalize import _
 from dabo.ui import dLabel
 from dabo.ui import dPanel

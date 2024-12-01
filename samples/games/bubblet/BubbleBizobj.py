@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 import dabo.biz as biz
+from dabo import settings
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 import random
@@ -20,7 +21,8 @@ class BubbleBizobj(biz.dBizobj):
         self.__isNewHighGame = False
 
     def initProperties(self):
-        self.BasePrefKey = dabo.dAppRef.BasePrefKey
+        app_ref = settings.get_dabo_package().app_reference
+        self.BasePrefKey = app_ref.BasePrefKey
 
     def newGame(self):
         for rr in self.bubbles:

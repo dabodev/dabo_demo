@@ -24,10 +24,10 @@ import dabo.db
 import dabo.biz
 import dabo.ui
 import dabo.lib.StopWatch as StopWatch
-from dabo.dApp import dApp
+from dabo.application import dApp
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
-import dabo.dEvents as dEvents
+from dabo import events
 
 # import dabo.lib.datanav as datanav
 from dabo.lib import specParser
@@ -81,7 +81,7 @@ _questionColor = "yellow"
 _hintColor = "black"
 
 
-class StateChanged(dabo.dEvents.Event):
+class StateChanged(events.Event):
     pass
 
 
@@ -369,7 +369,7 @@ class Board(dPanel):
             else:
                 o.Caption = ustr(a)
                 o.Enabled = False
-        o.unbindEvent(dabo.dEvents.Hit)
+        o.unbindEvent(events.Hit)
         self._firstHit = False
 
     def showAllSquares(self):
@@ -451,8 +451,8 @@ class Board(dPanel):
                 o = self.addObject(Square, "square_%s_%s" % (col, row))
                 o.square = (col, row)
                 self._boardDict[(col, row)]["obj"] = o
-                o.bindEvent(dabo.dEvents.MouseLeftClick, self.onSquareHit)
-                o.bindEvent(dabo.dEvents.ContextMenu, self.onContextMenu)
+                o.bindEvent(events.MouseLeftClick, self.onSquareHit)
+                o.bindEvent(events.ContextMenu, self.onContextMenu)
                 o.bindEvent(StateChanged, self.onStateChanged)
                 sizer.append(o, row=row, col=col, border=_squareBorder)
                 self.squares.append(o)
@@ -593,7 +593,7 @@ class Board(dPanel):
         except AttributeError:
             v = self._timer = dabo.ui.dTimer(self)
             v.Interval = _timerInterval
-            v.bindEvent(dEvents.Hit, self.onTimer)
+            v.bindEvent(events.Hit, self.onTimer)
         return v
 
     BoardSize = property(
@@ -658,7 +658,7 @@ class MinesweeperForm(dForm):
             ):
                 self._autopause = True
                 self.pausebutton.Value = True
-                self.pausebutton.raiseEvent(dEvents.Hit)
+                self.pausebutton.raiseEvent(events.Hit)
         except Exception:
             # need to figure out what to do about this. Happens on win32 but
             # not Linux, presumably because the deactivate is received after the
@@ -669,7 +669,7 @@ class MinesweeperForm(dForm):
         ## if game was automatically paused upon deactivate, unpause it now
         if self._autopause and self.board._GameInProgress:
             self.pausebutton.Value = False
-            self.pausebutton.raiseEvent(dEvents.Hit)
+            self.pausebutton.raiseEvent(events.Hit)
         self._autopause = False
 
     def updateGameInfo(self):
@@ -763,7 +763,7 @@ class MinesweeperForm(dForm):
         def onClose(evt):
             win.release()
 
-        win.bindEvent(dEvents.Close, onClose)
+        win.bindEvent(events.Close, onClose)
 
     def newGame(self):
         try:
@@ -1051,7 +1051,7 @@ Note that this will require an internet connection.
         hs.append(t, 1, border=b)
         vs.append(hs, "expand")
 
-        cb.bindEvent(dEvents.Hit, self.onPickPreset)
+        cb.bindEvent(events.Hit, self.onPickPreset)
 
         for name in ("Width", "Height", "Mines"):
             hs = dabo.ui.dSizer("horizontal")

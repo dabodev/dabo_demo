@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 from dabo.ui import dButton
 from dabo.ui import dLabel
@@ -21,7 +21,7 @@ class TestPanel(dPanel):
         sz.appendSpacer(10)
 
         btn = dButton(self, Caption="Selection Info")
-        btn.bindEvent(dEvents.Hit, self.onSelectionInfo)
+        btn.bindEvent(events.Hit, self.onSelectionInfo)
         sz.append(btn, halign="center")
 
     def onSelectionInfo(self, evt):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -23,7 +23,7 @@ class TestPanel(dPanel):
         sz.appendSpacer(10)
 
         self.slider = dSlider(self, Min=0, Max=88, Value=42, ShowLabels=True)
-        self.slider.bindEvent(dEvents.Hit, self.onSliderHit)
+        self.slider.bindEvent(events.Hit, self.onSliderHit)
         sz.append(self.slider, "x", border=30, borderSides=("Left", "Right"))
         sz.appendSpacer(25)
 

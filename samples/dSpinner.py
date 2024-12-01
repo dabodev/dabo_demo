@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -31,10 +31,10 @@ class TestPanel(dPanel):
             FontSize=12,
             Width=100,
         )
-        spn.bindEvent(dEvents.Hit, self.onSpinnerHit)
-        spn.bindEvent(dEvents.SpinUp, self.onSpinUp)
-        spn.bindEvent(dEvents.SpinDown, self.onSpinDown)
-        spn.bindEvent(dEvents.Spinner, self.onSpinner)
+        spn.bindEvent(events.Hit, self.onSpinnerHit)
+        spn.bindEvent(events.SpinUp, self.onSpinUp)
+        spn.bindEvent(events.SpinDown, self.onSpinDown)
+        spn.bindEvent(events.Spinner, self.onSpinner)
         sz.append(spn, halign="center")
 
         lbl = dLabel(self, Caption=_("Spinner Properties"), FontSize=18, FontBold=True)

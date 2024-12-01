@@ -3,7 +3,6 @@ import datetime
 
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 
 

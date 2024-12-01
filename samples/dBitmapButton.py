@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 from dabo.ui import dBitmapButton
 
@@ -51,7 +51,7 @@ class TestPanel(dPanel):
             Height=80,
             Width=80,
         )
-        btn.bindEvent(dEvents.Hit, self.onButtonHit)
+        btn.bindEvent(events.Hit, self.onButtonHit)
         hsz.append(btn)
         sz.appendSpacer(10)
 
@@ -63,7 +63,7 @@ class TestPanel(dPanel):
             Height=80,
             Width=80,
         )
-        btn.bindEvent(dEvents.Hit, self.onButtonHit)
+        btn.bindEvent(events.Hit, self.onButtonHit)
         hsz.append(btn)
 
         btn = dBitmapButton(
@@ -74,7 +74,7 @@ class TestPanel(dPanel):
             Height=80,
             Width=80,
         )
-        btn.bindEvent(dEvents.Hit, self.onButtonHit)
+        btn.bindEvent(events.Hit, self.onButtonHit)
         hsz.append(btn)
 
         sz.append(hsz, halign="center")

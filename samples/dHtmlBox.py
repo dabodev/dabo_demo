@@ -3,7 +3,7 @@ import datetime
 
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -39,7 +39,7 @@ class TestPanel(dPanel):
         sz.appendSpacer(2)
 
         eb = dEditBox(self, DataSource=self.htmlbox, DataField="Source")
-        eb.bindEvent(dEvents.KeyChar, self.textChangeHandler)
+        eb.bindEvent(events.KeyChar, self.textChangeHandler)
         sz.append1x(eb)
         sz.appendSpacer(2)
         btn = dButton(self, Caption="Reset", OnHit=self.resetHTML)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -29,7 +29,7 @@ class TestPanel(dPanel):
             Width=100,
             Height=100,
         )
-        btn.bindEvent(dEvents.Hit, self.onButtonHit)
+        btn.bindEvent(events.Hit, self.onButtonHit)
         sz.append(btn, halign="center")
         sz.appendSpacer(40)
 

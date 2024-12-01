@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 # dCheckBox = dabo.import_ui_name("dCheckBox")
@@ -18,7 +18,7 @@ class TestPanel(dPanel):
         sz.appendSpacer(25)
 
         chk = dCheckBox(self, Caption="Left-Aligned Check Box", Alignment="Left", Name="LeftCheck")
-        chk.bindEvent(dEvents.Hit, self.onCheckHit)
+        chk.bindEvent(events.Hit, self.onCheckHit)
         sz.append(chk, halign="center")
         sz.appendSpacer(10)
 
@@ -28,7 +28,7 @@ class TestPanel(dPanel):
             Alignment="Right",
             Name="RightCheck",
         )
-        chk.bindEvent(dEvents.Hit, self.onCheckHit)
+        chk.bindEvent(events.Hit, self.onCheckHit)
         sz.append(chk, halign="center")
         if self.Application.Platform == "Mac":
             sz.append(
@@ -50,7 +50,7 @@ class TestPanel(dPanel):
             UserThreeState=True,
             Name="3Check",
         )
-        chk.bindEvent(dEvents.Hit, self.onCheckHit)
+        chk.bindEvent(events.Hit, self.onCheckHit)
         sz.append(chk, halign="center")
         sz.appendSpacer(10)
 

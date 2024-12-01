@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 
@@ -28,11 +28,11 @@ class TestPanel(dPanel):
         sz.append(lbl, halign="right")
         sz.append(txt, "x")
 
-        txt.bindEvent(dEvents.GotFocus, self.onTextGotFocus)
-        txt.bindEvent(dEvents.LostFocus, self.onTextLostFocus)
-        txt.bindEvent(dEvents.Destroy, self.onTextDestroy)
-        txt.bindEvent(dEvents.KeyChar, self.onTextKeyChar)
-        txt.bindEvent(dEvents.Hit, self.onTextHit)
+        txt.bindEvent(events.GotFocus, self.onTextGotFocus)
+        txt.bindEvent(events.LostFocus, self.onTextLostFocus)
+        txt.bindEvent(events.Destroy, self.onTextDestroy)
+        txt.bindEvent(events.KeyChar, self.onTextKeyChar)
+        txt.bindEvent(events.Hit, self.onTextHit)
 
         # Password textbox
         lbl = dLabel(self, Caption=_("Password"))
@@ -40,11 +40,11 @@ class TestPanel(dPanel):
         sz.append(lbl, halign="right")
         sz.append(txt, "x")
 
-        txt.bindEvent(dEvents.GotFocus, self.onTextGotFocus)
-        txt.bindEvent(dEvents.LostFocus, self.onTextLostFocus)
-        txt.bindEvent(dEvents.Destroy, self.onTextDestroy)
-        txt.bindEvent(dEvents.KeyChar, self.onTextKeyChar)
-        txt.bindEvent(dEvents.Hit, self.onTextHit)
+        txt.bindEvent(events.GotFocus, self.onTextGotFocus)
+        txt.bindEvent(events.LostFocus, self.onTextLostFocus)
+        txt.bindEvent(events.Destroy, self.onTextDestroy)
+        txt.bindEvent(events.KeyChar, self.onTextKeyChar)
+        txt.bindEvent(events.Hit, self.onTextHit)
 
         # Let the textbox column grow
         sz.setColExpand(True, 1)

@@ -6,7 +6,8 @@ import os
 
 import dabo
 import dabo.ui
-from dabo.dApp import dApp
+from dabo import events
+from dabo.application import dApp
 from dabo.dLocalize import _
 
 if __name__ == "__main__":
@@ -33,10 +34,10 @@ class MontanaDeck(cardlib.PokerDeck):
         #         newCard._hover = True
         #         newCard.onHover = self.passHoverEvent
         #         newCard.endHover = self.passEndHoverEvent
-        newCard.bindEvent(dabo.dEvents.MouseLeftDown, self.board.onCardMDown)
-        newCard.bindEvent(dabo.dEvents.MouseLeftUp, self.board.onCardMUp)
-        newCard.bindEvent(dabo.dEvents.MouseLeftDoubleClick, self.board.onCardMDClick)
-        newCard.bindEvent(dabo.dEvents.MouseRightClick, self.board.onCardMDClick)
+        newCard.bindEvent(events.MouseLeftDown, self.board.onCardMDown)
+        newCard.bindEvent(events.MouseLeftUp, self.board.onCardMUp)
+        newCard.bindEvent(events.MouseLeftDoubleClick, self.board.onCardMDClick)
+        newCard.bindEvent(events.MouseRightClick, self.board.onCardMDClick)
 
     def createDeck(self):
         super(MontanaDeck, self).createDeck()
@@ -493,7 +494,7 @@ class MontanaForm(dForm):
         btn = self.btnRedeal = tb.appendControl(dabo.ui.dButton(tb, Enabled=False))
         btn.Height += 6
         self.updateRedealCaption()
-        self.btnRedeal.bindEvent(dabo.dEvents.Hit, self.onRedeal)
+        self.btnRedeal.bindEvent(events.Hit, self.onRedeal)
         tb.appendSeparator()
 
         tb.appendControl(dabo.ui.dLabel(tb, Caption="Hand Score:", Width=50, Height=20))
@@ -567,7 +568,7 @@ class MontanaForm(dForm):
         sz.append1x(txt, border=10)
         pnl.Sizer = sz
         btn = dabo.ui.dButton(win, Caption="OK")
-        btn.bindEvent(dabo.dEvents.Hit, win.close)
+        btn.bindEvent(events.Hit, win.close)
         win.Sizer.append(btn, border=10, halign="right")
         win.layout()
         pnl.fitToSizer()

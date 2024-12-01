@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -87,11 +87,11 @@ class TestPanel(dPanel):
         vsz = dSizer("v", DefaultSpacing=10)
 
         btn = dButton(self, Caption=_("Expand All"))
-        btn.bindEvent(dEvents.Hit, self.onExpandAll)
+        btn.bindEvent(events.Hit, self.onExpandAll)
         vsz.append(btn)
 
         btn = dButton(self, Caption=_("Collapse All"))
-        btn.bindEvent(dEvents.Hit, self.onCollapseAll)
+        btn.bindEvent(events.Hit, self.onCollapseAll)
         vsz.append(btn)
 
         chk = dCheckBox(

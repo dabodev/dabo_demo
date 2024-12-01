@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -56,13 +56,13 @@ class TestPanel(dPanel):
         lbl = dLabel(self, Caption=_("HGap:"))
         gs.append(lbl, halign="right")
         spn = dSpinner(self, DataSource="self.Parent.gridSizer", DataField="HGap")
-        spn.bindEvent(dEvents.Hit, self.onChangeLayout)
+        spn.bindEvent(events.Hit, self.onChangeLayout)
         gs.append(spn)
 
         lbl = dLabel(self, Caption=_("VGap:"))
         gs.append(lbl, halign="right")
         spn = dSpinner(self, DataSource="self.Parent.gridSizer", DataField="VGap")
-        spn.bindEvent(dEvents.Hit, self.onChangeLayout)
+        spn.bindEvent(events.Hit, self.onChangeLayout)
         gs.append(spn)
 
         # Add this *before* the first grid sizer

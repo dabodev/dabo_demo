@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 
@@ -85,7 +85,7 @@ class TestPanel(dPanel):
         # Add the Orientation selector
         self.ddOrientation = dDropdownList(self, Choices=["Vertical", "Horizontal"])
         self.ddOrientation.StringValue = self.displaySizer.Orientation
-        self.ddOrientation.bindEvent(dEvents.Hit, self.onOrientationChange)
+        self.ddOrientation.bindEvent(events.Hit, self.onOrientationChange)
         hsz = dSizer("h")
         hsz.append(dLabel(self, Caption=_("Orientation:")), valign="Middle")
         hsz.appendSpacer(4)
@@ -122,30 +122,30 @@ class SizerController(dPanel):
         # Add a labeled spinner to affect proportion
         sz.append(dLabel(self, Caption=_("Proportion:")), halign="right")
         self.proportionSpinner = dSpinner(self, Min=0, Max=10)
-        self.proportionSpinner.bindEvent(dEvents.Hit, self.onProportionChange)
+        self.proportionSpinner.bindEvent(events.Hit, self.onProportionChange)
         sz.append(self.proportionSpinner)
 
         # Add a checkbox to affect the Expand setting
         sz.append(dLabel(self, Caption=_("Expand?")), halign="right")
         self.expandChk = dCheckBox(self, Caption="")
-        self.expandChk.bindEvent(dEvents.Hit, self.onExpandChange)
+        self.expandChk.bindEvent(events.Hit, self.onExpandChange)
         sz.append(self.expandChk)
 
         # Add a spinner to set the Border
         sz.append(dLabel(self, Caption=_("Border:")), halign="right")
         self.borderSpinner = dSpinner(self, Min=0, Max=100, Value=1)
-        self.borderSpinner.bindEvent(dEvents.Hit, self.onBorderChange)
+        self.borderSpinner.bindEvent(events.Hit, self.onBorderChange)
         sz.append(self.borderSpinner)
 
         # Add a dropdown to select Horiz. and Vert. alignment
         sz.append(dLabel(self, Caption=_("Horiz. Align:")), halign="right")
         self.ddHAlign = dDropdownList(self, ValueMode="String", Choices=["Left", "Center", "Right"])
-        self.ddHAlign.bindEvent(dEvents.Hit, self.onAlignChange)
+        self.ddHAlign.bindEvent(events.Hit, self.onAlignChange)
         self.ddHAlign.sizerProp = "HAlign"
         sz.append(self.ddHAlign)
         sz.append(dLabel(self, Caption=_("Vert. Align:")), halign="right")
         self.ddVAlign = dDropdownList(self, ValueMode="String", Choices=["Top", "Middle", "Bottom"])
-        self.ddVAlign.bindEvent(dEvents.Hit, self.onAlignChange)
+        self.ddVAlign.bindEvent(events.Hit, self.onAlignChange)
         self.ddVAlign.sizerProp = "VAlign"
         sz.append(self.ddVAlign)
 

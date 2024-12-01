@@ -2,7 +2,6 @@
 import datetime
 
 import dabo
-import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from samples.games import MinesweeperForm
 

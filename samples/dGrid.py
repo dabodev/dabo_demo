@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 import datetime
 
@@ -283,7 +283,7 @@ class TestPanel(dPanel):
         gsz.append(spnSort, row=1, col=3, halign="center")
 
         btn = dButton(self, Caption="Sort Indicator Color")
-        btn.bindEvent(dEvents.Hit, self.onSetSortIndicatorColor)
+        btn.bindEvent(events.Hit, self.onSetSortIndicatorColor)
         gsz.append(btn, row=3, col=3, halign="center")
 
         sz.append(gsz, halign="Center", border=10)
@@ -294,11 +294,11 @@ class TestPanel(dPanel):
         hsz.append(lbl)
         hsz.appendSpacer(4)
         btn = dButton(self, Caption="Text")
-        btn.bindEvent(dEvents.Hit, self.onSetHeadColor)
+        btn.bindEvent(events.Hit, self.onSetHeadColor)
         hsz.append(btn)
         hsz.appendSpacer(4)
         btn = dButton(self, Caption="Background")
-        btn.bindEvent(dEvents.Hit, self.onSetHeadColor)
+        btn.bindEvent(events.Hit, self.onSetHeadColor)
         hsz.append(btn)
         hsz.appendSpacer(40)
 
@@ -306,11 +306,11 @@ class TestPanel(dPanel):
         hsz.append(lbl)
         hsz.appendSpacer(4)
         btn = dButton(self, Caption="Text")
-        btn.bindEvent(dEvents.Hit, self.onSetSelColor)
+        btn.bindEvent(events.Hit, self.onSetSelColor)
         hsz.append(btn)
         hsz.appendSpacer(4)
         btn = dButton(self, Caption="Background")
-        btn.bindEvent(dEvents.Hit, self.onSetSelColor)
+        btn.bindEvent(events.Hit, self.onSetSelColor)
         hsz.append(btn)
 
         sz.appendSpacer(4)

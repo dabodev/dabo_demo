@@ -3,8 +3,8 @@ import time
 
 import dabo
 import dabo.ui
-import dabo.dEvents as dEvents
-from dabo.dApp import dApp
+from dabo import events
+from dabo.application import dApp
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 from dabo.ui import dForm
@@ -22,7 +22,7 @@ else:
 class BubbletForm(dForm):
     def afterInit(self):
         self.tmr = dabo.ui.dTimer()
-        self.tmr.bindEvent(dEvents.Hit, self.onTimer)
+        self.tmr.bindEvent(events.Hit, self.onTimer)
         self._score = 0
         # Used to control unnecessary screen redraws
         self.noUpdate = False
@@ -83,7 +83,7 @@ class BubbletForm(dForm):
         fm.insertSeparator(0)
         fm.insert(0, _("&New Game"), HotKey="Ctrl+N", OnHit=self.onNewGame)
 
-        self.unbindEvent(dEvents.Paint)
+        self.unbindEvent(events.Paint)
         biz.newGame()
         dabo.ui.callAfter(self.update)
 

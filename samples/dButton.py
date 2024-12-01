@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-import dabo.dEvents as dEvents
+from dabo import events
 from dabo.dLocalize import _
 
 # from dabo.ui import dButtton
@@ -17,17 +17,17 @@ class TestPanel(dPanel):
         sz.appendSpacer(25)
 
         btn = dButton(self, Caption="Normal")
-        btn.bindEvent(dEvents.Hit, self.onButtonHit)
+        btn.bindEvent(events.Hit, self.onButtonHit)
         sz.append(btn, halign="center")
         sz.appendSpacer(10)
 
         btn = dButton(self, Caption="Default", DefaultButton=True)
-        btn.bindEvent(dEvents.Hit, self.onButtonHit)
+        btn.bindEvent(events.Hit, self.onButtonHit)
         sz.append(btn, halign="center")
         sz.appendSpacer(10)
 
         btn = dButton(self, Caption="Cancel", CancelButton=True)
-        btn.bindEvent(dEvents.Hit, self.onButtonHit)
+        btn.bindEvent(events.Hit, self.onButtonHit)
         sz.append(btn, halign="center")
         sz.appendSpacer(10)
 
