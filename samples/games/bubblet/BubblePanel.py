@@ -19,22 +19,22 @@ class BubblePanel(dPanel):
         self._sizeCache = (0, 0)
 
         plat = self.Application.Platform
-        if plat == "Win":
-            self.selectedBackColor = (192, 192, 255)
-        else:
-            self.selectedBackColor = (128, 128, 192)
-        self.unselectedBackColor = (255, 255, 255)
+        self.selectedBackColor = (192, 192, 255) if plat == "Win" else (128, 128, 192)
+        self.unselectedBackColor = "white"
         self.autoClearDrawings = plat in ("Win", "Gtk")
         self.row = -1
         self.col = -1
-        # Create a background that will change to indicate
-        # selected status.
-        self.back = self.drawRectangle(0, 0, 1, 1, penWidth=0)
         # Create a dummy circle, and store the reference
-        self.circle = self.drawCircle(0, 0, 1)
+        self.circle = self.drawCircle(50, 50, 1)
+        self.text = self.drawText("X", 25, 25)
+        self.text.DynamicText = self._get_text
         self.DynamicVisible = lambda: not self.Popped
+        self.MinimumSize = (50, 50)
         self.onResize(None)
         self.update()
+
+    def _get_text(self):
+        return f"{'P' if self.Popped else ' '}{'S' if self.Selected else 'x'}"
 
     def setRandomColor(self, repaint=False):
         self.Color = random.choice(self._colors)
@@ -42,30 +42,31 @@ class BubblePanel(dPanel):
             self.Popped = False
 
     def update(self):
-        dabo.ui.callAfterInterval(50, self._delayedUpdate)
+        dabo.ui.callAfter(self._delayedUpdate)
 
     def _delayedUpdate(self):
         circ = self.circle
-        back = self.back
-        circ.AutoUpdate = back.AutoUpdate = False
+#         circ.AutoUpdate = False
         selct = self.Selected
         poppd = self.Popped
-        back.FillColor = {
+        self.BackColor = {
             True: self.selectedBackColor,
             False: self.unselectedBackColor,
         }[selct]
-        circ.FillColor = {True: "white", False: self.Color}[poppd]
-        circ.PenWidth = {True: 0, False: 1}[poppd]
+        if poppd:
+            circ.Visible = False
+        else:
+            circ.FillColor = self.Color
+            circ.PenWidth = 1
         wd, ht = self.Size
-        back.Width, back.Height = wd, ht
-        pos = ((wd / 2), (ht / 2))
-        rad = min(wd, ht) / 2
-        circ.Xpos = int(wd / 2)
-        circ.Ypos = int(ht / 2)
+        pos = (round(wd / 2), round(ht / 2))
+        rad = round(min(wd, ht) / 2)
+        circ.Xpos = round(wd / 2)
+        circ.Ypos = round(ht / 2)
         circ.Radius = rad
-        circ.AutoUpdate = back.AutoUpdate = True
+        circ.AutoUpdate = True
         self._needRedraw = True
-        super(BubblePanel, self).update()
+        super().update()
 
     def onResize(self, evt):
         sz = self.Size

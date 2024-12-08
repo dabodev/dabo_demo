@@ -15,6 +15,7 @@ dGridSizer = dabo.ui.dGridSizer
 
 class TestPanel(dPanel):
     def afterInit(self):
+
         sz = self.Sizer = dSizer("V")
         sz.appendSpacer(50)
 
@@ -30,46 +31,48 @@ class TestPanel(dPanel):
 
         # Create the grid sizer
         gridPanel = dPanel(self, BackColor="moccasin")
-        gs = self.gridSizer = gridPanel.Sizer = dGridSizer(MaxCols=2, HGap=3, VGap=8)
+        gs = self.demo_grid_sizer = gridPanel.Sizer = dGridSizer(MaxCols=2, HGap=3, VGap=8)
 
-        lbl = dLabel(gridPanel, Caption="First", BackColor="powderblue")
-        ctl = dTextBox(gridPanel, BackColor="powderblue")
+        lbl = dLabel(gridPanel, Caption="First")
+        ctl = dTextBox(gridPanel)
         gs.append(lbl, halign="right")
-        gs.append(ctl)
-        lbl = dLabel(gridPanel, Caption="Second", BackColor="powderblue")
-        ctl = dTextBox(gridPanel, BackColor="powderblue")
+        gs.append(ctl, layout="x")
+        lbl = dLabel(gridPanel, Caption="Second")
+        ctl = dTextBox(gridPanel)
         gs.append(lbl, halign="right")
-        gs.append(ctl)
-        lbl = dLabel(gridPanel, Caption="Third", BackColor="powderblue")
-        ctl = dTextBox(gridPanel, BackColor="powderblue")
+        gs.append(ctl, layout="x")
+        lbl = dLabel(gridPanel, Caption="Third")
+        ctl = dTextBox(gridPanel)
         gs.append(lbl, halign="right")
-        gs.append(ctl)
-        lbl = dLabel(gridPanel, Caption="Fourth", BackColor="powderblue")
-        ctl = dTextBox(gridPanel, BackColor="powderblue")
+        gs.append(ctl, layout="x")
+        lbl = dLabel(gridPanel, Caption="Fourth")
+        ctl = dTextBox(gridPanel)
         gs.append(lbl, halign="right")
-        gs.append(ctl)
+        gs.append(ctl, layout="x")
+
+        gs.setColExpand(True, 1)
 
         hs = dSizer("H")
-        hs.append(gridPanel, valign="middle")
+        hs.append1x(gridPanel, halign="center")
 
         gs = dGridSizer(MaxCols=2)
         lbl = dLabel(self, Caption=_("HGap:"))
         gs.append(lbl, halign="right")
-        spn = dSpinner(self, DataSource="self.Parent.gridSizer", DataField="HGap")
+        spn = dSpinner(self, DataSource="self.Parent.demo_grid_sizer", DataField="HGap")
         spn.bindEvent(events.Hit, self.onChangeLayout)
         gs.append(spn)
 
         lbl = dLabel(self, Caption=_("VGap:"))
         gs.append(lbl, halign="right")
-        spn = dSpinner(self, DataSource="self.Parent.gridSizer", DataField="VGap")
+        spn = dSpinner(self, DataSource="self.Parent.demo_grid_sizer", DataField="VGap")
         spn.bindEvent(events.Hit, self.onChangeLayout)
         gs.append(spn)
 
         # Add this *before* the first grid sizer
+        hs.insert(0, gs, halign="center")
         hs.prependSpacer(30)
-        hs.insert(0, gs, valign="middle")
         # Now add the horizontal sizer to the main sizer for the panel.
-        sz.append(hs, halign="center")
+        sz.append(hs, valign="middle", proportion=1, layout="expand")
         # Call update() to set the controls' Value.
         self.update()
 

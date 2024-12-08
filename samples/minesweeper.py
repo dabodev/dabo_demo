@@ -3,13 +3,12 @@ import datetime
 
 import dabo
 from dabo.dLocalize import _
-from samples.games import MinesweeperForm
-
-
 from dabo.ui import dLabel
 from dabo.ui import dPanel
 from dabo.ui import dSizer
 from dabo.ui import dButton
+
+from samples.games import MinesweeperForm
 
 
 class TestPanel(dPanel):
@@ -19,7 +18,10 @@ class TestPanel(dPanel):
 
         lbl = dLabel(
             self,
-            Caption="The classic game of Minesweeper, implemented in the Dabo UI.\n\nFor instructions, please see the Overview tab.",
+            Caption=(
+                "The classic game of Minesweeper, implemented in the Dabo UI.\n\nFor instructions, "
+                "please see the Overview tab."
+            ),
         )
         sz.append(lbl, halign="center")
         sz.appendSpacer(30)

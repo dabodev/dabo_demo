@@ -24,7 +24,7 @@ import types
 from pathlib import Path
 
 import dabo.lib.utils as utils
-import dabo.events
+from dabo import events
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 from dabo import settings

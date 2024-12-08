@@ -30,16 +30,6 @@ class TestPanel(dPanel):
         )
         chk.bindEvent(events.Hit, self.onCheckHit)
         sz.append(chk, halign="center")
-        if self.Application.Platform == "Mac":
-            sz.append(
-                dLabel(
-                    self,
-                    FontSize=8,
-                    FontItalic=True,
-                    Caption="(currently not supported on the Mac)",
-                ),
-                halign="center",
-            )
         sz.appendSpacer(10)
 
         chk = dCheckBox(

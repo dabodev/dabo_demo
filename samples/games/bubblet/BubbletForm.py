@@ -2,7 +2,7 @@
 import time
 
 import dabo
-import dabo.ui
+from dabo import ui
 from dabo import events
 from dabo.application import dApp
 from dabo.dLocalize import _
@@ -21,7 +21,9 @@ else:
 
 class BubbletForm(dForm):
     def afterInit(self):
-        self.tmr = dabo.ui.dTimer()
+        self.ShowStatusBar = True
+        self.BackColor = "white"
+        self.tmr = ui.dTimer()
         self.tmr.bindEvent(events.Hit, self.onTimer)
         self._score = 0
         # Used to control unnecessary screen redraws
@@ -30,11 +32,12 @@ class BubbletForm(dForm):
         # Rows and columns
         self.rows = 7
         self.columns = 10
-        bubbles = [[] for r in range(self.rows)]
+        bubbles = [[] for _ in range(self.rows)]
 
-        vsz = dabo.ui.dSizer("v")
-        gsz = dabo.ui.dGridSizer(MaxCols=self.columns)
+        vsz = self.Sizer = ui.dSizer("v")
 
+        bubble_panel = ui.dPanel(self)
+        gsz = bubble_panel.Sizer = ui.dGridSizer(MaxCols=self.columns)
         for rr in range(self.rows):
             for cc in range(self.columns):
                 pn = BubblePanel(self)
@@ -42,18 +45,18 @@ class BubbletForm(dForm):
                 pn.col = cc
                 # pn.ToolTipText = "Row %s, Col %s" % (rr,cc)
                 bubbles[rr].append(pn)
-                gsz.append(pn, "x")
+                gsz.append(pn, layout="expand")
         # Set the grid sizer to grow
         gsz.setColExpand(True, "all")
         gsz.setRowExpand(True, "all")
-        vsz.append1x(gsz)
+        vsz.append1x(bubble_panel)
 
         # Add the score
-        sp = self.scorePanel = dabo.ui.dPanel(self)
-        sp.Sizer = hsz = dabo.ui.dSizer("h")
-        label = dabo.ui.dLabel(sp, Caption=_("Score:"), FontSize=12)
+        sp = self.scorePanel = ui.dPanel(self)
+        sp.Sizer = hsz = ui.dSizer("h")
+        label = ui.dLabel(sp, Caption=_("Score:"), FontSize=12)
         hsz.append1x(label, halign="right")
-        self.scoreLabel = dabo.ui.dLabel(sp, FontSize=14, FontBold=True)
+        self.scoreLabel = ui.dLabel(sp, FontSize=14, FontBold=True)
         hsz.append1x(self.scoreLabel)
         vsz.append(sp, 0, "x")
 
@@ -85,14 +88,14 @@ class BubbletForm(dForm):
 
         self.unbindEvent(events.Paint)
         biz.newGame()
-        dabo.ui.callAfter(self.update)
+        ui.callAfter(self.update)
 
     def saveScreenShot(self, evt):
         """Saves a screenshot of the current board."""
-        dabo.ui.saveScreenShot(self)
+        ui.saveScreenShot(self)
 
     def refresh(self):
-        dabo.ui.callAfterInterval(100, self._refresh)
+        ui.callAfterInterval(100, self._refresh)
 
     def _refresh(self):
         super(BubbletForm, self).refresh()
@@ -108,13 +111,13 @@ class BubbletForm(dForm):
 
         func = biz.getCallback()
         if func:
-            dabo.ui.callAfter(func, self.updateBoard)
+            ui.callAfter(func, self.updateBoard)
         self.StatusText = biz.Message
         self.noUpdate = False
         self.update()
 
         if biz.GameOver:
-            dabo.ui.callAfterInterval(500, self.gameOverMsg)
+            ui.callAfterInterval(500, self.gameOverMsg)
 
     def updateBoard(self):
         self.tmr.start(100)
@@ -123,19 +126,19 @@ class BubbletForm(dForm):
         self.tmr.stop()
         self.update()
         if self.Bizobj.GameOver:
-            dabo.ui.callAfterInterval(500, self.gameOverMsg)
+            ui.callAfterInterval(500, self.gameOverMsg)
 
     def gameOverMsg(self):
         msg = _("Game Over!")
         if self.Bizobj.IsNewHighGame:
             msg = _("New High Game!!")
         msg += _("\n\nYour score was %s") % self.Score
-        dabo.ui.info(msg, _("Game Over"))
+        ui.info(msg, _("Game Over"))
 
     def onNewGame(self, evt):
         biz = self.Bizobj
         if not biz.GameOver:
-            if not dabo.ui.areYouSure(
+            if not ui.areYouSure(
                 message=_("Are you sure you want to end this game?"),
                 title=_("Game Not Over"),
                 defaultNo=True,
@@ -157,7 +160,7 @@ class BubbletForm(dForm):
     def onResetStats(self, evt):
         biz = self.Bizobj
         if biz.NumberOfGames > 0:
-            if not dabo.ui.areYouSure(
+            if not ui.areYouSure(
                 message=_("Are you sure you want to reset your statistics?"),
                 title=_("Reset Statistics"),
                 defaultNo=False,
