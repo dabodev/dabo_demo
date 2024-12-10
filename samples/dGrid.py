@@ -67,8 +67,8 @@ class DemoGrid(dGrid):
                 "color": "gold",
             },
             {
-                "name": "Madeline Albright",
-                "age": thisYear - 1937,
+                "name": "Barack Obama",
+                "age": thisYear - 1961,
                 "coder": False,
                 "color": "red",
             },

@@ -12,29 +12,28 @@ from dabo.ui import dBorderSizer
 
 dGauge = dabo.ui.dGauge
 
+SIZE = (150, 150)
+
 
 class TestPanel(dPanel):
     def afterInit(self):
         sz = self.Sizer = dSizer("v")
         sz.appendSpacer(25)
 
-        bsz = dBorderSizer(self, "v", Caption="Horizontal Gauge")
-        self.gaugeH = dGauge(self)
-        bsz.append(self.gaugeH, "x", border=30, borderSides=("Left", "Right"))
-
+        self.gaugeH = dGauge(self, Orientation="h", Size=SIZE)
+        self.gaugeV = dGauge(self, Orientation="v", Size=SIZE)
         self.lblH = dLabel(self)
-        bsz.append(self.lblH, halign="center")
-        sz.append(bsz, "x", halign="center", border=20, borderSides=("Left", "Right"))
-        sz.appendSpacer(50)
-
-        hsz = dBorderSizer(self, "h", Caption="Vertical Gauge")
-        self.gaugeV = dGauge(self, Orientation="v")
-        hsz.append(self.gaugeV, "x", border=30, borderSides=("Left", "Right"), halign="center")
-        hsz.appendSpacer(10)
-
         self.lblV = dLabel(self)
-        hsz.append(self.lblV, valign="middle")
-        sz.append(hsz, 1, halign="center")
+        hg_sz = dSizer("h")
+        hg_sz.append(self.gaugeH, valign="middle")
+        hg_sz.appendSpacer(10)
+        hg_sz.append(self.lblH, valign="middle")
+        vg_sz = dSizer("h")
+        vg_sz.append(self.gaugeV, valign="middle")
+        vg_sz.append(self.lblV, valign="middle")
+        sz.append(hg_sz, halign="center")
+        sz.appendSpacer(20)
+        sz.append(vg_sz, halign="center")
 
         self.tmr = dabo.ui.callEvery(500, self.updateGauges)
         self.update()
@@ -75,7 +74,8 @@ by setting the <b>Value</b> property to the current value; the gauge then update
 reflect the percentage of the total for that value. You can alternately set the <b>Percentage</b>
 property, and the appropriate Value for that Percentage will be set.</p>
 
-<p>Gauges do not raise any events, or respond to user interaction. They are simply a convenient way to display the progress of a task or process.</p>
+<p>Gauges do not raise any events, or respond to user interaction. They are simply a convenient 
+way to display the progress of a task or process.</p>
 """
 
 if __name__ == "__main__":
