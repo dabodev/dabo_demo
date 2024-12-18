@@ -51,9 +51,12 @@ class TestPanel(dPanel):
                                DataField="VerticalRules")
         chk_header = dCheckBox(self, Caption="Show Header", DataSource=lc,
                                DataField="HeaderVisible")
+        chk_sort = dCheckBox(self, Caption="Sort on Header Click", DataSource=lc,
+                               DataField="SortOnHeaderClick")
         sz.append(chk_hrules, border=200, borderSides=["left"])
         sz.append(chk_vrules, border=200, borderSides=["left"])
         sz.append(chk_header, border=200, borderSides=["left"])
+        sz.append(chk_sort, border=200, borderSides=["left"])
         sz.appendSpacer(25)
 
 
