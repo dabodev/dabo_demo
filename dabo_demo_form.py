@@ -880,9 +880,9 @@ class DaboDemoForm(ui.dForm):
             err = DemoError(sys.exc_info())
             pnl.setErrorInfo(self.codePage, err)
         sz.append1x(pnl)
-        if self.displayFrame.SelectedPageNumber == 0:
+        if self.displayFrame.SelectedPageNumber != 2:
             # Switch to the demo
-            self.demoPageFrame.showDemoPage()
+            ui.callAfter(self.demoPageFrame.showDemoPage)
         self.demoPanel.layout(resetMin=True)
 
     def treeSelection(self):
