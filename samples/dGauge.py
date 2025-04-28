@@ -4,7 +4,8 @@ import random
 import dabo
 import dabo.ui
 from dabo.application import dApp
-from dabo.dLocalize import _
+from dabo.localization import _
+from dabo.ui import dCheckBox
 from dabo.ui import dLabel
 from dabo.ui import dPanel
 from dabo.ui import dSizer
@@ -22,8 +23,13 @@ class TestPanel(dPanel):
 
         self.gaugeH = dGauge(self, Orientation="h", Size=SIZE)
         self.gaugeV = dGauge(self, Orientation="v", Size=SIZE)
+        self.gaugePulse = dGauge(self, Orientation="h", Size=SIZE)
+        self.gaugePulse.Pulse()
         self.lblH = dLabel(self)
         self.lblV = dLabel(self)
+        self.lblPulse = dLabel(self)
+        self.chkPulse = dCheckBox(self, Caption="Pulse?", Value=True, DataSource=self.gaugePulse,
+                                  DataField="Pulsing")
         hg_sz = dSizer("h")
         hg_sz.append(self.gaugeH, valign="middle")
         hg_sz.appendSpacer(10)
@@ -31,9 +37,16 @@ class TestPanel(dPanel):
         vg_sz = dSizer("h")
         vg_sz.append(self.gaugeV, valign="middle")
         vg_sz.append(self.lblV, valign="middle")
+        pg_sz = dSizer("h")
+        pg_sz.append(self.gaugePulse, valign="middle")
+        pg_sz.appendSpacer(10)
+        pg_sz.append(self.lblPulse, valign="middle")
         sz.append(hg_sz, halign="center")
         sz.appendSpacer(20)
         sz.append(vg_sz, halign="center")
+        sz.appendSpacer(20)
+        sz.append(pg_sz, halign="center")
+        sz.append(self.chkPulse, halign="center")
 
         self.tmr = dabo.ui.callEvery(500, self.updateGauges)
         self.update()
@@ -56,6 +69,19 @@ class TestPanel(dPanel):
             val -= gv.Range
         gv.Value = val
         self.lblV.Caption = "%s%% complete" % int(gv.Percentage)
+
+        gp = self.gaugePulse
+        if gp.Pulsing:
+            self.lblPulse.Caption = "Pulsing..."
+        else:
+            increase = random.randrange(3, 10)
+            val = gp.Value + increase
+            if val > gp.Range:
+                val -= gp.Range
+            gp.Value = val
+            self.lblPulse.Caption = "%s%% complete" % int(gp.Percentage)
+
+
         self.layout()
 
     def onDestroy(self, evt):
@@ -73,6 +99,10 @@ data analysis.</p>
 by setting the <b>Value</b> property to the current value; the gauge then updates to
 reflect the percentage of the total for that value. You can alternately set the <b>Percentage</b>
 property, and the appropriate Value for that Percentage will be set.</p>
+
+<p>It also supports a Pulsing property, which shows the colored part of the gauge moving
+back-and-forth instead of a fixed percentage across. This is useful for showing an in-progress
+state, where the exact percentage of the task that's completed cannot be calculated.</p>
 
 <p>Gauges do not raise any events, or respond to user interaction. They are simply a convenient 
 way to display the progress of a task or process.</p>

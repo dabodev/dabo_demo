@@ -16,11 +16,13 @@ def main():
 
     app = dApp(
         showSplashScreen=useSplash,
-        splashTimeout=3000,
+        splashTimeout=1234,
         MainFormClass=DaboDemoForm,
         BasePrefKey="demo.DaboDemo",
     )
     app.setAppInfo("appName", "DaboDemo")
+    app.setup()
+    app.DrawSizerOutlines = True
     app.start()
 
 

@@ -160,7 +160,7 @@ import sys
 from modules import DemoModules
 from modules import DemoError
 from modules import DemoErrorPanel
-from dabo.dLocalize import _
+from dabo.localization import _
 ]]>
         </importStatements>
         <setupMenu><![CDATA[

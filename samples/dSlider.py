@@ -2,7 +2,7 @@
 import dabo
 import dabo.ui
 from dabo import events
-from dabo.dLocalize import _
+from dabo.localization import _
 
 
 from dabo.ui import dLabel

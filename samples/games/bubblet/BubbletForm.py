@@ -5,7 +5,7 @@ import dabo
 from dabo import ui
 from dabo import events
 from dabo.application import dApp
-from dabo.dLocalize import _
+from dabo.localization import _
 from dabo.lib.utils import ustr
 from dabo.ui import dForm
 

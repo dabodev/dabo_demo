@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
-from dabo.dLocalize import _
+from dabo.localization import _
 from dabo.lib.utils import ustr
 
 
@@ -195,7 +194,7 @@ class TestPanel(dPanel):
     def getColorName(self, curr):
         ret = dabo.ui.getColor(curr)
         try:
-            nm = dabo.dColors.colorNameFromTuple(ret, firstOnly=True)
+            nm = dabo.color_tools.colorNameFromTuple(ret, firstOnly=True)
             if nm:
                 ret = nm
         except ValueError:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-from dabo.dLocalize import _
+from dabo.localization import _
 
 try:
     import numpy.oldnumeric as _Numeric

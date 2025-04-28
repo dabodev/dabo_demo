@@ -2,7 +2,7 @@
 import dabo
 import dabo.ui
 from dabo import events
-from dabo.dLocalize import _
+from dabo.localization import _
 
 
 from dabo.ui import dLabel
@@ -53,10 +53,13 @@ class TestPanel(dPanel):
                                DataField="HeaderVisible")
         chk_sort = dCheckBox(self, Caption="Sort on Header Click", DataSource=lc,
                                DataField="SortOnHeaderClick")
+        chk_mult = dCheckBox(self, Caption="Allow Multiple Selection", DataSource=lc,
+                               DataField="MultipleSelect")
         sz.append(chk_hrules, border=200, borderSides=["left"])
         sz.append(chk_vrules, border=200, borderSides=["left"])
         sz.append(chk_header, border=200, borderSides=["left"])
         sz.append(chk_sort, border=200, borderSides=["left"])
+        sz.append(chk_mult, border=200, borderSides=["left"])
         sz.appendSpacer(25)
 
 

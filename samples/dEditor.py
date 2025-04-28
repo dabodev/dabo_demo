@@ -2,10 +2,11 @@
 import dabo
 from dabo import events
 from dabo import ui
-from dabo.dLocalize import _
-from dabo.ui import dLabel
+from dabo.localization import _
 from dabo.ui import dButton
+from dabo.ui import dCheckBox
 from dabo.ui import dDropdownList
+from dabo.ui import dLabel
 from dabo.ui import dPanel
 from dabo.ui import dSizer
 from dabo.ui import dSpinner
@@ -51,11 +52,31 @@ class TestPanel(dPanel):
             Min=6,
             DataSource=self.edt,
             DataField="FontSize",
+            Caption="FontSize",
         )
+
+        self.chk_auto = dCheckBox(
+            self, Caption="AutoAutoComplete", DataSource=self.edt, DataField="AutoAutoComplete"
+        )
+        self.spn_autolen = dSpinner(
+            self,
+            Increment=1,
+            Max=16,
+            Min=1,
+            DataSource=self.edt,
+            DataField="AutoAutoCompleteMinLen",
+            Caption="Min. Autocomplete Length",
+            ToolTipText=(
+                "Determines how many characters need to be typed before AutoComplete triggers"
+            ),
+        )
+
         self.update_btn = dButton(self, Caption="Update", OnHit=self.call_update)
         vsz.append(self.sel_lang, border=5)
         vsz.append(self.sel_font, border=5)
         vsz.append(self.spn_sz, border=5)
+        vsz.append(self.chk_auto, border=5)
+        vsz.append(self.spn_autolen, border=5)
         vsz.append(self.update_btn, border=5)
         sz.append(vsz, halign="center")
         sz.appendSpacer(10)

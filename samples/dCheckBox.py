@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 from dabo import events
-from dabo.dLocalize import _
+from dabo.localization import _
 
 # dCheckBox = dabo.import_ui_name("dCheckBox")
 

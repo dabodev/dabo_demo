@@ -2,7 +2,7 @@
 import dabo
 import dabo.ui
 from dabo import events
-from dabo.dLocalize import _
+from dabo.localization import _
 
 
 from dabo.ui import dLabel
@@ -23,22 +23,26 @@ class TestPanel(dPanel):
         sz.appendSpacer(50)
         spn = self.spinner = dSpinner(
             self,
+            Caption="Spinner Example",
             Max=25,
             Min=0,
             Value=4.75,
             Increment=1.25,
             SpinnerWrap=False,
             FontSize=12,
-            Width=100,
         )
         spn.bindEvent(events.Hit, self.onSpinnerHit)
         spn.bindEvent(events.SpinUp, self.onSpinUp)
         spn.bindEvent(events.SpinDown, self.onSpinDown)
         spn.bindEvent(events.Spinner, self.onSpinner)
-        sz.append(spn, halign="center")
+        hsz = dSizer("h")
+        hsz.appendSpacer(0)
+        hsz.append(spn)
+        hsz.appendSpacer(0)
+        sz.append(hsz, halign="center")
+        sz.appendSpacer(50)
 
         lbl = dLabel(self, Caption=_("Spinner Properties"), FontSize=18, FontBold=True)
-        sz.appendSpacer(10)
         sz.append(lbl, halign="center")
         sz.appendSpacer(4)
 
@@ -55,6 +59,14 @@ class TestPanel(dPanel):
         txt = dTextBox(self, DataSource=spn, DataField="Increment", StrictNumericEntry=False)
         gsz.append(lbl, halign="right")
         gsz.append(txt)
+        lbl = dLabel(self, Caption="Caption")
+        txt = dTextBox(self, DataSource=spn, DataField="Caption")
+        gsz.append(lbl, halign="right")
+        gsz.append(txt)
+        lbl = dLabel(self, Caption="LabelLeft")
+        chk = dCheckBox(self, DataSource=spn, DataField="LabelLeft")
+        gsz.append(lbl, halign="right")
+        gsz.append(chk)
         lbl = dLabel(self, Caption="SpinnerWrap")
         chk = dCheckBox(self, DataSource=spn, DataField="SpinnerWrap")
         gsz.append(lbl, halign="right")

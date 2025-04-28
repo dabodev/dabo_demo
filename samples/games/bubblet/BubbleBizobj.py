@@ -2,7 +2,7 @@
 import dabo
 import dabo.biz as biz
 from dabo import settings
-from dabo.dLocalize import _
+from dabo.localization import _
 from dabo.lib.utils import ustr
 import random
 import time

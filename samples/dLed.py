@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 import dabo
-from dabo.dLocalize import _
+from dabo.localization import _
 
 
 from dabo.ui import dLabel
@@ -47,7 +46,7 @@ class TestPanel(dPanel):
         gs.append(
             dDropdownList(
                 self,
-                Choices=dabo.dColors.colors,
+                Choices=dabo.color_tools.colors,
                 DataSource=self.LED,
                 DataField="OnColor",
                 Value="green",
@@ -58,7 +57,7 @@ class TestPanel(dPanel):
         gs.append(
             dDropdownList(
                 self,
-                Choices=dabo.dColors.colors,
+                Choices=dabo.color_tools.colors,
                 DataSource=self.LED,
                 DataField="OffColor",
                 Value="darkred",

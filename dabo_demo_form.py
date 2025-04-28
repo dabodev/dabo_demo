@@ -8,7 +8,7 @@ import dabo
 from dabo import events
 from dabo import ui
 from dabo.lib.utils import ustr
-from dabo.dLocalize import _
+from dabo.localization import _
 
 from modules import DemoModules
 from modules import DemoError
@@ -876,6 +876,7 @@ class DaboDemoForm(ui.dForm):
         try:
             pnl = self.demoModules.getActive().TestPanel(dpnl)
         except Exception as e:
+            print("EXCEPTION!!!", e)
             pnl = DemoErrorPanel(dpnl)
             err = DemoError(sys.exc_info())
             pnl.setErrorInfo(self.codePage, err)

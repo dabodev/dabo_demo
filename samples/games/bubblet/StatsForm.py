@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-from dabo.dLocalize import _
+from dabo.localization import _
 from dabo.lib.utils import ustr
 from dabo.ui import dDialog
 

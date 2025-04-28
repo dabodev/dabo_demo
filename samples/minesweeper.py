@@ -2,7 +2,7 @@
 import datetime
 
 import dabo
-from dabo.dLocalize import _
+from dabo.localization import _
 from dabo.ui import dLabel
 from dabo.ui import dPanel
 from dabo.ui import dSizer

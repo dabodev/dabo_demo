@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dabo
-from dabo.dLocalize import _
+from dabo.localization import _
 
 
 from dabo.ui import dLabel
@@ -118,8 +118,8 @@ class TestPanel(dPanel):
 
         style = random.choice(self.slidePanel1._barStyles)
         self.slidePanel1.BarStyle = style
-        color1 = dabo.dColors.randomColorName()
-        color2 = dabo.dColors.randomColorName()
+        color1 = dabo.color_tools.randomColorName()
+        color2 = dabo.color_tools.randomColorName()
         self.slidePanel1.BarColor1 = color1
         self.slidePanel1.BarColor2 = color2
 

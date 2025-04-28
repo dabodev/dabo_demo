@@ -2,7 +2,7 @@
 import datetime
 
 import dabo
-from dabo.dLocalize import _
+from dabo.localization import _
 from samples.games import MontanaForm
 
 

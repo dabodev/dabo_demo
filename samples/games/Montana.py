@@ -8,7 +8,7 @@ import dabo
 import dabo.ui
 from dabo import events
 from dabo.application import dApp
-from dabo.dLocalize import _
+from dabo.localization import _
 
 if __name__ == "__main__":
     import demo

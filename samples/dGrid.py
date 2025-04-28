@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
 from dabo import events
-from dabo.dLocalize import _
+from dabo.localization import _
 import datetime
 
 
@@ -141,7 +140,7 @@ class DemoGrid(dGrid):
         )
         self.addColumn(col)
 
-        col.ListEditorChoices = dabo.dColors.colors
+        col.ListEditorChoices = dabo.color_tools.colors
         col.CustomEditorClass = col.listEditorClass
 
         col.HeaderVerticalAlignment = "Bottom"

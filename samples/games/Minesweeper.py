@@ -25,7 +25,7 @@ from dabo import biz
 from dabo import ui
 import dabo.lib.StopWatch as StopWatch
 from dabo.application import dApp
-from dabo.dLocalize import _
+from dabo.localization import _
 from dabo.lib.utils import ustr
 from dabo import events
 from dabo import settings
@@ -848,7 +848,7 @@ this to work."""
                     biz.save()
                     self.Application.PreferenceManager.playername = biz.Record.playername
                     break
-                except dabo.dException.BusinessRuleViolation as e:
+                except dabo.exceptions.BusinessRuleViolation as e:
                     ui.exclaim(ustr(e))
                 dlg.show()
                 if not dlg.Accepted:

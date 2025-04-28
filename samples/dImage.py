@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dabo
 import dabo.ui
-from dabo.dLocalize import _
+from dabo.localization import _
 
 
 from dabo.ui import dLabel

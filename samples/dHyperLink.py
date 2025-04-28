@@ -3,7 +3,7 @@ import datetime
 
 import dabo
 import dabo.ui
-from dabo.dLocalize import _
+from dabo.localization import _
 
 
 from dabo.ui import dLabel
@@ -35,9 +35,9 @@ class TestPanel(dPanel):
         bs = dBorderSizer(self)
         lnk = self.link = dHyperLink(
             self,
-            Caption="The Dabo Wiki",
+            Caption="Dabo on Github",
             FontSize=24,
-            URL="http://wiki.dabodev.com/",
+            URL="https://github.com/dabodev/dabo",
             LinkColor="olive",
             VisitedColor="maroon",
             HoverColor="crimson",
